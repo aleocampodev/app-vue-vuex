@@ -1,18 +1,42 @@
 <template>
   <div class="home">
+    
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Title msg="Bienvenido"/>
+    {{productos}}
+    <div class="row">
+      <Card
+        v-for="producto of productos" :key="producto.id"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import {useStore} from 'vuex'
+import { computed, onMounted } from 'vue'
+import Title from '@/components/Title.vue'
+import Card from '../components/Card.vue'
+import { onMounted } from '@vue/runtime-core'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    Title,
+    Card
+  },
+  setup(){
+    const store= useStore()
+    onMounted(() => {
+      console.log("onMounted")
+      store.dispatch('fetchData')
+    })
+
+    const productos = computed(() => store.state.productos)
+
+    return{productos}
+  
   }
 }
 </script>
