@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    productos: {},
+    productos: [],
     carrito:{}
   },
   mutations: {
@@ -24,11 +24,11 @@ export default createStore({
         console.log(error)
       }
     },
-    agregar({commit,state},producto){
+    agregarAlCarrito({commit,state},producto){
       state.carrito.hasOwnProperty(producto.id)
       ? producto.cantidad= state.carrito[producto.id].cantidad  + 1
       : producto.cantidad = 1
-      commit('setCarrito, producto')
+      commit('setCarrito', producto)
     }
   },
   modules: {

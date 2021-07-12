@@ -1,41 +1,42 @@
 <template>
-  <div class="home">
-    
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Title msg="Bienvenido"/>
-    {{productos}}
+  <div class="container">
+    <img alt="Car shopping" src="../assets/car.png">
+    <Title msg="Carrito de compras"/>
+    <pre>
+      {{productos}}
+    </pre>
     <div class="row">
-      <Card
-        v-for="producto of productos" :key="producto.id"
-      />
+      <Card />
     </div>
+    
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import {useStore} from 'vuex'
+// import {useStore} from 'vuex'
 import { computed, onMounted } from 'vue'
 import Title from '@/components/Title.vue'
-import Card from '../components/Card.vue'
-import { onMounted } from '@vue/runtime-core'
+import Card from '@/components/Card.vue'
+// import Carrito from '../components/Carrito.vue'
 
 export default {
-  name: 'Home',
+  name:'Home',
   components: {
     Title,
     Card
+
   },
   setup(){
-    const store= useStore()
-    onMounted(() => {
+    //const store= useStore()
+    onMounted(() =>{
       console.log("onMounted")
-      store.dispatch('fetchData')
+      // store.dispatch('fetchData')
     })
 
-    const productos = computed(() => store.state.productos)
+    //const productos = computed(() => store.state.productos)
+    // const carrito = computed(() => store.state.carrito)
 
-    return{productos}
+    // return{productos,carrito}
   
   }
 }
